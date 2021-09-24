@@ -1,0 +1,19 @@
+{
+  "env": {
+    "jest": true
+  },
+  "extends": [
+    "next/core-web-vitals", 
+    "plugin:@typescript-eslint/eslint-recommended", 
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  }
+}
