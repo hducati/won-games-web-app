@@ -23,4 +23,27 @@ describe('<GameCard />', () => {
     expect(screen.getByRole('img', { name: props.title })).toBeInTheDocument()
     expect(screen.getByText(props.price)).toBeInTheDocument()
   })
+
+  it('should render default price', () => {
+    renderWithTheme(<GameCard {...props} />)
+
+    const price = screen.getByText(props.price)
+
+    expect(price).toHaveStyleRule('background-color', '#3CD3C1')
+    expect(price).not.toHaveStyleRule('text-decoration', 'line-through')
+  })
+
+  it('should render a line-through in price when promotional', () => {
+    const promotionalPrice = 'R$ 15,00'
+    renderWithTheme(<GameCard {...props} promotionalPrice={promotionalPrice} />)
+
+    const priceText = screen.getByText(props.price)
+    const promotionalPriceText = screen.getByText(promotionalPrice)
+
+    expect(priceText).toHaveStyleRule('text-decoration', 'line-through')
+    expect(promotionalPriceText).not.toHaveStyleRule(
+      'text-decoration',
+      'line-through'
+    )
+  })
 })
