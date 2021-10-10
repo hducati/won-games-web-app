@@ -58,7 +58,7 @@ export const Info = styled.div`
 
 export const Title = styled.h3`
   ${({ theme }) => css`
-    font-size: ${theme.font.sizes.medium}px;
+    font-size: ${theme.font.sizes.medium};
     font-weight: ${theme.font.bold};
     color: ${theme.colors.black};
     line-height: ${theme.font.sizes.medium};
@@ -67,8 +67,8 @@ export const Title = styled.h3`
 
 export const Developer = styled.h4`
   ${({ theme }) => css`
-    font-size: ${theme.font.sizes.xsmall};
-    font-weight: ${theme.font.bold}
+    font-size: ${theme.font.sizes.small};
+    font-weight: ${theme.font.bold};
     color: ${theme.colors.gray};
   `}
 `
