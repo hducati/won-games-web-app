@@ -68,6 +68,16 @@ export const Title = styled.h2`
 
 export const Subtitle = styled.h3`
   ${({ theme }) => css`
+    color: ${theme.colors.white};
+    font-size: ${theme.font.sizes.small};
+    font-weight: ${theme.font.normal};
+    margin-bottom: ${theme.spacings.xsmall};
+
+    strong {
+      color: ${theme.colors.primary};
+      font-weight: ${theme.font.bold};
+    }
+
     ${media.greaterThan('medium')`
       font-size: ${theme.font.sizes.large};
     `}
