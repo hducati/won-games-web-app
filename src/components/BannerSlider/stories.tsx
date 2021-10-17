@@ -34,7 +34,7 @@ export default {
   parameters: {
     layout: 'fullscreen',
     backgrounds: {
-      default: 'dark'
+      default: 'won-dark'
     }
   }
 } as Meta

@@ -5,6 +5,19 @@ import { ThemeProvider} from 'styled-components'
 import theme from 'styles/theme'
 
 export const parameters = {
+  backgrounds: {
+    default: 'won-light',
+    values: [
+      {
+        name: 'won-light',
+        value: theme.colors.white
+      },
+      {
+        name: 'won-dark',
+        value: theme.colors.mainBg
+      }
+    ]
+  },
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
