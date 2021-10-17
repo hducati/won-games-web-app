@@ -11,7 +11,7 @@ const Footer = () => (
     <S.Content>
       <S.Column>
         <Heading color="black" size="small" lineBottom lineColor="secondary">
-          Contact
+          Contact us
         </Heading>
 
         <a href="mailto:sac@wongames.com">sac@wongames.com</a>
