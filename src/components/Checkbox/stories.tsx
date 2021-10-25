@@ -1,10 +1,10 @@
 import { Meta, Story } from '@storybook/react/types-6-0'
 
-import Checkbox from '.'
+import Checkbox, { CheckboxProps } from '.'
 
 export default {
   title: 'Checkbox',
   component: Checkbox
 } as Meta
 
-export const Basic: Story = (args) => <Checkbox {...args} />
+export const Default: Story<CheckboxProps> = (args) => <Checkbox {...args} />
