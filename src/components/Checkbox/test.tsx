@@ -1,5 +1,6 @@
-import { screen } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
+import userEvent from '@testing-library/user-event'
 
 import Checkbox from '.'
 
@@ -30,5 +31,24 @@ describe('<Checkbox />', () => {
     const labelText = screen.getByText(/checkbox label/i)
 
     expect(labelText).toHaveStyle({ color: '#030517' })
+  })
+
+  it('should not trigger onCheck when event is not triggered', () => {
+    const onCheck = jest.fn()
+
+    renderWithTheme(<Checkbox label="checkbox" onCheck={onCheck} />)
+
+    expect(onCheck).not.toHaveBeenCalled()
+  })
+
+  it('should call onCheck when user-event is triggered', async () => {
+    const onCheck = jest.fn()
+
+    renderWithTheme(<Checkbox label="checkbox" onCheck={onCheck} />)
+
+    userEvent.click(screen.getByRole('checkbox'))
+    await waitFor(() => {
+      expect(onCheck).toHaveBeenCalledTimes(1)
+    })
   })
 })
