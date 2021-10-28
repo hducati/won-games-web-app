@@ -71,4 +71,15 @@ describe('<TextField />', () => {
 
     expect(icon).toBeInTheDocument()
   })
+
+  it('Renders with Icon on the right side', () => {
+    renderWithTheme(
+      <TextField
+        icon={<AddShoppingCart data-testid="icon" />}
+        iconPosition="right"
+      />
+    )
+
+    expect(screen.getByTestId('icon').parentElement).toHaveStyle({ order: 1 })
+  })
 })
