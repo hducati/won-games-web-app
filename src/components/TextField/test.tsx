@@ -104,4 +104,19 @@ describe('<TextField />', () => {
 
     expect(textField).toBeDisabled()
   })
+
+  it('should render with error', () => {
+    renderWithTheme(
+      <TextField
+        label="TextField"
+        labelFor="TextField"
+        id="TextField"
+        error="Error message"
+      />
+    )
+
+    const errorMessage = screen.getByText(/error message/i)
+
+    expect(errorMessage).toBeInTheDocument()
+  })
 })
