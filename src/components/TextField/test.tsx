@@ -72,7 +72,7 @@ describe('<TextField />', () => {
     expect(icon).toBeInTheDocument()
   })
 
-  it('Renders with Icon on the right side', () => {
+  it('should render an Icon on the right side', () => {
     renderWithTheme(
       <TextField
         icon={<AddShoppingCart data-testid="icon" />}
@@ -81,5 +81,27 @@ describe('<TextField />', () => {
     )
 
     expect(screen.getByTestId('icon').parentElement).toHaveStyle({ order: 1 })
+  })
+
+  it('should disable input correctly', async () => {
+    renderWithTheme(
+      <TextField
+        label="TextField"
+        labelFor="TextField"
+        id="TextField"
+        disabled
+      />
+    )
+
+    const textField = screen.getByRole(/textbox/i)
+    const text = 'new text'
+
+    userEvent.type(textField, text)
+
+    await waitFor(() => {
+      expect(textField).not.toHaveValue(text)
+    })
+
+    expect(textField).toBeDisabled()
   })
 })
