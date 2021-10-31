@@ -3,7 +3,7 @@ import { AddShoppingCart } from '@styled-icons/material-outlined/AddShoppingCart
 import TextField, { TextFieldProps } from '.'
 
 export default {
-  title: 'TextField',
+  title: 'Form/TextField',
   component: TextField,
 
   argTypes: {
