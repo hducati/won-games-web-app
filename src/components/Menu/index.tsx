@@ -71,13 +71,19 @@ const Menu = ({ username }: MenuProps) => {
 
         {!username && (
           <S.RegisterBox>
-            <Button fullWidth size="large">
-              Log in now
-            </Button>
-            <span>or</span>
-            <S.CreateAccount href="#" title="Sign In">
-              Sign Up
-            </S.CreateAccount>
+            <>
+              <Link href="/sign-in" passHref>
+                <Button fullWidth size="large" as="a">
+                  Log in now
+                </Button>
+              </Link>
+              <span>or</span>
+              <Link href="/sign-up" passHref>
+                <S.CreateAccount href="#" title="Sign In">
+                  Sign Up
+                </S.CreateAccount>
+              </Link>
+            </>
           </S.RegisterBox>
         )}
       </S.MenuFull>
