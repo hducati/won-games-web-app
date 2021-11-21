@@ -7,6 +7,42 @@ import highlightMock from 'components/Highlight/mock'
 
 import Home from '.'
 
+jest.mock('components/Menu', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Mock menu"></div>
+    }
+  }
+})
+
+jest.mock('components/Footer', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Mock footer"></div>
+    }
+  }
+})
+
+jest.mock('components/Showcase', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Mock showcase"></div>
+    }
+  }
+})
+
+jest.mock('components/BannerSlider', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Mock banner slider"></div>
+    }
+  }
+})
+
 const props = {
   banners: bannersMock,
   newGames: [gamesMock[0]],
@@ -20,35 +56,17 @@ const props = {
 }
 
 describe('<Home />', () => {
-  it('should render menu and footer', () => {
+  it('should render menu, footer, sections and banner slider', () => {
     renderWithTheme(<Home {...props} />)
 
-    expect(screen.getByLabelText(/open menu/i)).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: /contact us/i })
-    ).toBeInTheDocument()
-  })
+    const menu = screen.getByTestId('Mock menu')
+    const footer = screen.getByTestId('Mock footer')
+    const showCase = screen.getAllByTestId('Mock showcase')
+    const bannerSlider = screen.getByTestId('Mock banner slider')
 
-  it('should render the sections', () => {
-    renderWithTheme(<Home {...props} />)
-
-    expect(screen.getByRole('heading', { name: /news/i })).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: /most popular/i })
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: /upcoming/i })
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: /free games/i })
-    ).toBeInTheDocument()
-  })
-
-  it('should render section elements', () => {
-    renderWithTheme(<Home {...props} />)
-
-    expect(screen.getAllByText(/defy death 1/i)).toHaveLength(1)
-    expect(screen.getAllByText(/population zero/i)).toHaveLength(5)
-    expect(screen.getAllByText(/read Dead is back/i)).toHaveLength(3)
+    expect(menu).toBeInTheDocument()
+    expect(footer).toBeInTheDocument()
+    expect(bannerSlider).toBeInTheDocument()
+    expect(showCase).toHaveLength(5)
   })
 })
