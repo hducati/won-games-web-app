@@ -7,24 +7,6 @@ import highlightMock from 'components/Highlight/mock'
 
 import Home from '.'
 
-jest.mock('components/Menu', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Mock menu"></div>
-    }
-  }
-})
-
-jest.mock('components/Footer', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Mock footer"></div>
-    }
-  }
-})
-
 jest.mock('components/Showcase', () => {
   return {
     __esModule: true,
@@ -56,16 +38,12 @@ const props = {
 }
 
 describe('<Home />', () => {
-  it('should render menu, footer, sections and banner slider', () => {
+  it('should render banner and showcases', () => {
     renderWithTheme(<Home {...props} />)
 
-    const menu = screen.getByTestId('Mock menu')
-    const footer = screen.getByTestId('Mock footer')
     const showCase = screen.getAllByTestId('Mock showcase')
     const bannerSlider = screen.getByTestId('Mock banner slider')
 
-    expect(menu).toBeInTheDocument()
-    expect(footer).toBeInTheDocument()
     expect(bannerSlider).toBeInTheDocument()
     expect(showCase).toHaveLength(5)
   })
