@@ -2,8 +2,9 @@ import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/Arrow
 import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
 import { Close } from '@styled-icons/material-outlined/Close'
 
+import SlickSlider from 'react-slick'
 import Slider, { SliderSettings } from 'components/Slider'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import * as S from './styles'
 
 export type GalleryImageProps = {
@@ -15,12 +16,17 @@ export type GalleryProps = {
   items: GalleryImageProps[]
 }
 
-const settings: SliderSettings = {
-  slidesToShow: 4,
+const commonSettings: SliderSettings = {
+  arrows: true,
   infinite: false,
   lazyLoad: 'ondemand',
   nextArrow: <ArrowRight aria-label="next image" />,
-  prevArrow: <ArrowLeft aria-label="previous image" />,
+  prevArrow: <ArrowLeft aria-label="previous image" />
+}
+
+const settings: SliderSettings = {
+  ...commonSettings,
+  slidesToShow: 4,
   responsive: [
     {
       breakpoint: 1375,
@@ -49,7 +55,13 @@ const settings: SliderSettings = {
   ]
 }
 
+const modalSettings: SliderSettings = {
+  ...commonSettings,
+  slidesToShow: 1
+}
+
 const Gallery = ({ items }: GalleryProps) => {
+  const slider = useRef<SlickSlider>(null)
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
@@ -63,7 +75,7 @@ const Gallery = ({ items }: GalleryProps) => {
 
   return (
     <S.Wrapper>
-      <Slider settings={settings}>
+      <Slider ref={slider} settings={settings}>
         {items.map((item, index) => (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -73,6 +85,7 @@ const Gallery = ({ items }: GalleryProps) => {
             alt={`Thumb - ${item.label}`}
             onClick={() => {
               setIsOpen(true)
+              slider.current!.slickGoTo(index, true)
             }}
           />
         ))}
@@ -86,6 +99,19 @@ const Gallery = ({ items }: GalleryProps) => {
         >
           <Close size={40} />
         </S.Close>
+
+        <S.Content>
+          <Slider ref={slider} settings={modalSettings}>
+            {items.map((item, index) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={`gallery-${index}`}
+                src={item.src}
+                alt={`${item.label}`}
+              />
+            ))}
+          </Slider>
+        </S.Content>
       </S.Modal>
     </S.Wrapper>
   )
