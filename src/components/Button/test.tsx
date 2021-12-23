@@ -78,4 +78,14 @@ describe('<Button />', () => {
     expect(button).toHaveStyle({ background: 'none', color: '#F231A5' })
     expect(button).toHaveStyleRule('background', 'none', { modifier: ':hover' })
   })
+
+  it('should render a disabled button', () => {
+    renderWithTheme(<Button disabled>Buy now</Button>)
+
+    const button = screen.getByRole('button', { name: /buy now/i })
+
+    expect(button).toHaveStyleRule('cursor', 'not-allowed', {
+      modifier: ':disabled'
+    })
+  })
 })
