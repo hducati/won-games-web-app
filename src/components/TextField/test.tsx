@@ -7,7 +7,7 @@ import TextField from '.'
 
 describe('<TextField />', () => {
   it('should render with label', () => {
-    renderWithTheme(<TextField label="Label" id="Field" labelFor="Field" />)
+    renderWithTheme(<TextField label="Label" name="Field" />)
 
     const label = screen.getByLabelText(/Label/i)
 
@@ -28,9 +28,7 @@ describe('<TextField />', () => {
 
   it('should change its type when typing', async () => {
     const onInput = jest.fn()
-    renderWithTheme(
-      <TextField label="Label" id="Field" labelFor="Field" onInput={onInput} />
-    )
+    renderWithTheme(<TextField label="Label" name="Field" onInput={onInput} />)
 
     const input = screen.getByRole('textbox')
     const text = 'new text'
@@ -46,9 +44,7 @@ describe('<TextField />', () => {
   })
 
   it('should be accessible', () => {
-    renderWithTheme(
-      <TextField label="TextField" labelFor="TextField" id="TextField" />
-    )
+    renderWithTheme(<TextField label="TextField" name="TextField" />)
 
     const input = screen.getByLabelText('TextField')
     expect(document.body).toHaveFocus()
@@ -61,7 +57,7 @@ describe('<TextField />', () => {
     renderWithTheme(
       <TextField
         label="TextField"
-        labelFor="TextField"
+        name="TextField"
         id="TextField"
         icon={<AddShoppingCart data-testid="icon" />}
       />
@@ -84,14 +80,7 @@ describe('<TextField />', () => {
   })
 
   it('should disable input correctly', async () => {
-    renderWithTheme(
-      <TextField
-        label="TextField"
-        labelFor="TextField"
-        id="TextField"
-        disabled
-      />
-    )
+    renderWithTheme(<TextField label="TextField" name="TextField" disabled />)
 
     const textField = screen.getByRole(/textbox/i)
     const text = 'new text'
@@ -109,7 +98,7 @@ describe('<TextField />', () => {
     renderWithTheme(
       <TextField
         label="TextField"
-        labelFor="TextField"
+        name="TextField"
         id="TextField"
         error="Error message"
       />

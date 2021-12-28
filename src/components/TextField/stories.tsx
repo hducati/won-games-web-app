@@ -19,8 +19,7 @@ export const Default: Story<TextFieldProps> = (args) => (
 
 Default.args = {
   label: 'E-mail',
-  labelFor: 'Email',
-  id: 'Email',
+  name: 'email',
   initialValue: '',
   placeholder: 'john.cage@gmail.com'
 }
@@ -33,8 +32,7 @@ export const withIcon: Story<TextFieldProps> = (args) => (
 
 withIcon.args = {
   label: 'E-mail',
-  labelFor: 'Email',
-  id: 'Email',
+  name: 'email',
   initialValue: '',
   placeholder: 'john.cage@gmail.com',
   icon: <AddShoppingCart />
