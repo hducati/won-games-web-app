@@ -9,7 +9,7 @@ export type OrdersListProps = {
 
 const OrdersList = ({ items = [] }: OrdersListProps) => (
   <S.Wrapper>
-    <Heading lineBottom size="small">
+    <Heading lineBottom size="small" color="black">
       My orders
     </Heading>
 
