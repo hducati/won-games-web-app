@@ -1,14 +1,17 @@
 import styled, { css } from 'styled-components'
 import { CheckboxProps } from '.'
 
-export const Wrapper = styled.main``
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
 
 export const Input = styled.input`
   ${({ theme }) => css`
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     appearance: none;
     width: 1.8rem;
     height: 1.8rem;
@@ -29,11 +32,16 @@ export const Input = styled.input`
       position: absolute;
       top: 0.1rem;
       opacity: 0;
-      transitition: ${theme.transition.fast};
+      transition: ${theme.transition.fast};
     }
 
     &:focus {
       box-shadow: 0 0 0.5rem ${theme.colors.primary};
+    }
+
+    &:hover {
+      border-color: ${theme.colors.gray};
+      transition: ${theme.transition.fast};
     }
 
     &:checked {
@@ -49,9 +57,9 @@ export const Input = styled.input`
 
 export const Label = styled.label<Pick<CheckboxProps, 'labelColor'>>`
   ${({ theme, labelColor }) => css`
-    color: ${theme.colors[labelColor!]};
     cursor: pointer;
     padding-left: ${theme.spacings.xxsmall};
-    line-height: 1;
+    color: ${theme.colors[labelColor!]};
+    line-height: 1.8rem;
   `}
 `
