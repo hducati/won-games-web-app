@@ -33,4 +33,16 @@ describe('<ExploreSidebar />', () => {
 
     expect(screen.getByRole('button', { name: /filter/i })).toBeInTheDocument()
   })
+
+  it('should check initial values are passed', () => {
+    renderWithTheme(
+      <ExploreSidebar
+        items={items}
+        initialValues={{ windows: true, sort_by: 'low-to-high' }}
+      />
+    )
+
+    expect(screen.getByRole('checkbox', { name: /windows/i })).toBeChecked()
+    expect(screen.getByRole('radio', { name: /low to high/i })).toBeChecked()
+  })
 })
