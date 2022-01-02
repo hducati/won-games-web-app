@@ -24,10 +24,23 @@ type Values = {
 export type ExploreSidebarProps = {
   items: ItemProps[]
   initialValues?: Values
+  onFilter: (values: Values) => void
 }
 
-const ExploreSidebar = ({ items, initialValues = {} }: ExploreSidebarProps) => {
+const ExploreSidebar = ({
+  items,
+  initialValues = {},
+  onFilter
+}: ExploreSidebarProps) => {
   const [values, setValues] = useState(initialValues)
+
+  const handleFilter = (): void => {
+    onFilter(values)
+  }
+
+  const handleChange = (name: string, value: string | boolean): void => {
+    setValues((prevValues) => ({ ...prevValues, [name]: value }))
+  }
 
   return (
     <S.Wrapper>
@@ -45,6 +58,7 @@ const ExploreSidebar = ({ items, initialValues = {} }: ExploreSidebarProps) => {
                 labelFor={field.name}
                 key={field.name}
                 isChecked={!!values[field.name]}
+                onCheck={(value) => handleChange(field.name, value)}
               />
             ))}
 
@@ -58,11 +72,12 @@ const ExploreSidebar = ({ items, initialValues = {} }: ExploreSidebarProps) => {
                 labelFor={field.name}
                 key={field.name}
                 defaultChecked={field.name === values[item.name]}
+                onChange={() => handleChange(item.name, field.name)}
               />
             ))}
         </div>
       ))}
-      <Button fullWidth size="medium">
+      <Button fullWidth size="medium" onClick={handleFilter}>
         Filter
       </Button>
     </S.Wrapper>
