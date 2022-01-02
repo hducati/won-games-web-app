@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 import * as CheckboxStyles from 'components/Checkbox/styles'
 import * as RadioStyles from 'components/Radio/styles'
 import * as HeadingStyles from 'components/Heading/styles'
-import * as ButtonStyles from 'components/Button/styles'
 
 type FilterFullProps = {
   isOpen: boolean
@@ -35,10 +34,8 @@ export const IconWrapper = styled.div`
 `
 
 export const InputWrapper = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
-  `}
+  display: flex;
+  flex-direction: column;
 `
 
 export const ExploreBox = styled.div``
@@ -68,7 +65,7 @@ export const FilterFull = styled.div<FilterFullProps>`
       height: 2.4rem;
       top: 0;
       right: 0;
-      margin: ${theme.spacings.xsmall};
+      margin: ${theme.spacings.xxsmall};
       color: ${theme.colors.black};
     }
 

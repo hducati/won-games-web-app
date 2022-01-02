@@ -108,7 +108,7 @@ const ExploreSidebar = ({
     <S.Wrapper>
       <MediaMatch lessThan="medium">
         <S.IconWrapper onClick={() => setIsOpen(true)}>
-          <MenuIcon aria-label="Open Menu" />
+          <MenuIcon aria-label="Open Filter" />
         </S.IconWrapper>
       </MediaMatch>
 
@@ -117,7 +117,7 @@ const ExploreSidebar = ({
       </MediaMatch>
 
       <S.FilterFull aria-hidden={!isOpen} isOpen={isOpen}>
-        <CloseIcon onClick={() => setIsOpen(false)} />
+        <CloseIcon aria-label="Close Filter" onClick={() => setIsOpen(false)} />
         {renderInputElements({ color: 'black' })}
       </S.FilterFull>
     </S.Wrapper>
