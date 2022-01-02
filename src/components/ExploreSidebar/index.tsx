@@ -1,24 +1,24 @@
-import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
-import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
+import { useState } from 'react'
+import { Close } from '@styled-icons/material-outlined/Close'
+import { FilterList } from '@styled-icons/material-outlined/FilterList'
 
+import Heading from 'components/Heading'
 import Button from 'components/Button'
 import Checkbox from 'components/Checkbox'
-import Heading from 'components/Heading'
-import MediaMatch from 'components/MediaMatch'
 import Radio from 'components/Radio'
-import { useState } from 'react'
-import * as S from './styles'
 
-type Field = {
-  label: string
-  name: string
-}
+import * as S from './styles'
 
 export type ItemProps = {
   title: string
   name: string
   type: string
   fields: Field[]
+}
+
+type Field = {
+  label: string
+  name: string
 }
 
 type Values = {
@@ -31,95 +31,72 @@ export type ExploreSidebarProps = {
   onFilter: (values: Values) => void
 }
 
-type InputElementProps = {
-  color: 'black' | 'white'
-}
-
 const ExploreSidebar = ({
   items,
-  initialValues = {},
-  onFilter
+  onFilter,
+  initialValues = {}
 }: ExploreSidebarProps) => {
   const [values, setValues] = useState(initialValues)
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleFilter = (): void => {
+  const handleChange = (name: string, value: string | boolean) => {
+    setValues((s) => ({ ...s, [name]: value }))
+  }
+
+  const handleFilter = () => {
     onFilter(values)
+    setIsOpen(false)
   }
 
-  const handleChange = (name: string, value: string | boolean): void => {
-    setValues((prevValues) => ({ ...prevValues, [name]: value }))
-  }
+  return (
+    <S.Wrapper isOpen={isOpen}>
+      <S.Overlay aria-hidden={isOpen} />
+      <S.IconWrapper>
+        <FilterList aria-label="open filters" onClick={() => setIsOpen(true)} />
+        <Close aria-label="close filters" onClick={() => setIsOpen(false)} />
+      </S.IconWrapper>
 
-  const renderInputElements = ({
-    color
-  }: InputElementProps): React.ReactElement => {
-    return (
-      <S.InputWrapper>
+      <S.Content>
         {items.map((item) => (
-          <S.ExploreBox key={item.title}>
-            <Heading
-              color={color}
-              lineBottom
-              lineColor="secondary"
-              size="small"
-            >
+          <S.Items key={item.title}>
+            <Heading lineBottom lineColor="secondary" size="small">
               {item.title}
             </Heading>
 
             {item.type === 'checkbox' &&
               item.fields.map((field) => (
                 <Checkbox
+                  key={field.name}
                   name={field.name}
                   label={field.label}
                   labelFor={field.name}
-                  key={field.name}
-                  labelColor={color}
                   isChecked={!!values[field.name]}
-                  onCheck={(value) => handleChange(field.name, value)}
+                  onCheck={(v) => handleChange(field.name, v)}
                 />
               ))}
 
             {item.type === 'radio' &&
               item.fields.map((field) => (
                 <Radio
+                  key={field.name}
                   id={field.name}
-                  name={item.name}
                   value={field.name}
+                  name={item.name}
                   label={field.label}
                   labelFor={field.name}
-                  labelColor={color}
-                  key={field.name}
                   defaultChecked={field.name === values[item.name]}
                   onChange={() => handleChange(item.name, field.name)}
                 />
               ))}
-          </S.ExploreBox>
+          </S.Items>
         ))}
+      </S.Content>
 
+      <S.Footer>
         <Button fullWidth size="medium" onClick={handleFilter}>
           Filter
         </Button>
-      </S.InputWrapper>
-    )
-  }
-
-  return (
-    <S.Wrapper>
-      <MediaMatch lessThan="medium">
-        <S.IconWrapper onClick={() => setIsOpen(true)}>
-          <MenuIcon aria-label="Open Filter" />
-        </S.IconWrapper>
-      </MediaMatch>
-
-      <MediaMatch greaterThan="medium">
-        {renderInputElements({ color: 'white' })}
-      </MediaMatch>
-
-      <S.FilterFull aria-hidden={!isOpen} isOpen={isOpen}>
-        <CloseIcon aria-label="Close Filter" onClick={() => setIsOpen(false)} />
-        {renderInputElements({ color: 'black' })}
-      </S.FilterFull>
+      </S.Footer>
     </S.Wrapper>
   )
 }
