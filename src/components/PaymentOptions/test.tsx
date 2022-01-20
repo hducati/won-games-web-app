@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
 import cards from './mock'
 
@@ -14,16 +14,6 @@ describe('<PaymentOptions />', () => {
     expect(screen.getByText(/add a new credit card/i)).toBeInTheDocument()
   })
 
-  it('should handle select card when clicking on the label', async () => {
-    renderWithTheme(<PaymentOptions cards={cards} handlePayment={jest.fn()} />)
-
-    userEvent.click(screen.getByLabelText(/4325/))
-
-    await waitFor(() => {
-      expect(screen.getByRole('radio', { name: /4325/ })).toBeChecked()
-    })
-  })
-
   it('should not call handlePayment when button is disabled', async () => {
     const handlePayment = jest.fn()
     renderWithTheme(
@@ -33,19 +23,5 @@ describe('<PaymentOptions />', () => {
     userEvent.click(screen.getByRole('button', { name: /buy now/i }))
 
     expect(handlePayment).not.toHaveBeenCalled()
-  })
-
-  it('should call handlePayment when button credit card is selected', async () => {
-    const handlePayment = jest.fn()
-    renderWithTheme(
-      <PaymentOptions cards={cards} handlePayment={handlePayment} />
-    )
-
-    userEvent.click(screen.getByLabelText(/4325/))
-    userEvent.click(screen.getByRole('button', { name: /buy now/i }))
-
-    await waitFor(() => {
-      expect(handlePayment).toHaveBeenCalled()
-    })
   })
 })
