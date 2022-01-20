@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
-import theme from 'styles/theme'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
