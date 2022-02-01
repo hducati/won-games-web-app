@@ -18,6 +18,10 @@ const GamesTemplate = ({ games = [], filterItems }: GamesTemplateProps) => {
     return
   }
 
+  const onShowMore = (): void => {
+    return
+  }
+
   return (
     <Base>
       <S.Main>
@@ -30,7 +34,7 @@ const GamesTemplate = ({ games = [], filterItems }: GamesTemplateProps) => {
             ))}
           </Grid>
 
-          <S.ShowMore role="button" onClick={() => console.log('show more')}>
+          <S.ShowMore role="button" onClick={onShowMore}>
             <p>Show More</p>
             <KeyboardArrowDown size={35} />
           </S.ShowMore>
