@@ -17,6 +17,16 @@ describe('<Dropdown />', () => {
     expect(screen.queryByText(/toggle dropdown/i)).not.toBeInTheDocument()
   })
 
+  it('should render the title', () => {
+    renderWithTheme(
+      <Dropdown title={title}>
+        <span>content</span>
+      </Dropdown>
+    )
+
+    expect(screen.getByLabelText(/toggle dropdown/)).toBeInTheDocument()
+  })
+
   it('should open dropdown', () => {
     renderWithTheme(
       <Dropdown title={title}>
