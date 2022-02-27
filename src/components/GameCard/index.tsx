@@ -5,9 +5,11 @@ import {
 } from '@styled-icons/material-outlined'
 import Button from 'components/Button'
 import Ribbon, { RibbonColors, RibbonSizes } from 'components/Ribbon'
+import Link from 'next/link'
 import * as S from './styles'
 
 export type GameCardProps = {
+  slug: string
   title: string
   developer: string
   img: string
@@ -21,6 +23,7 @@ export type GameCardProps = {
 }
 
 const GameCard = ({
+  slug,
   title,
   developer,
   img,
@@ -33,14 +36,23 @@ const GameCard = ({
   ribbonColor = 'primary'
 }: GameCardProps) => (
   <S.Wrapper>
-    <S.ImageBox>
-      <img src={img} alt={title} />
-    </S.ImageBox>
+    {!!ribbon && (
+      <Ribbon size={ribbonSize} color={ribbonColor}>
+        {ribbon}
+      </Ribbon>
+    )}
+    <Link href={`/game/${slug}`} passHref>
+      <S.ImageBox>
+        <img src={img} alt={title} />
+      </S.ImageBox>
+    </Link>
     <S.Content>
-      <S.Info>
-        <S.Title>{title}</S.Title>
-        <S.Developer>{developer}</S.Developer>
-      </S.Info>
+      <Link href={`/game/${slug}`} passHref>
+        <S.Info>
+          <S.Title>{title}</S.Title>
+          <S.Developer>{developer}</S.Developer>
+        </S.Info>
+      </Link>
 
       <S.FavButton role="button" onClick={onFav}>
         {favorite ? (
@@ -56,12 +68,6 @@ const GameCard = ({
         <Button icon={<AddShoppingCart />} size="small"></Button>
       </S.BuyBox>
     </S.Content>
-
-    {!!ribbon && (
-      <Ribbon size={ribbonSize} color={ribbonColor}>
-        {ribbon}
-      </Ribbon>
-    )}
   </S.Wrapper>
 )
 
