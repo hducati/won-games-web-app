@@ -6,7 +6,7 @@ import GameInfo from '.'
 const props = {
   title: 'My game title',
   description: 'My game description',
-  price: '210.00'
+  price: 210
 }
 
 describe('<GameInfo />', () => {
@@ -15,7 +15,7 @@ describe('<GameInfo />', () => {
 
     const title = screen.getByRole('heading', { name: props.title })
     const description = screen.getByText(props.description)
-    const price = screen.getByText(`$${props.price}`)
+    const price = screen.getByText(/\$210\.00/)
 
     expect(title).toBeInTheDocument()
     expect(description).toBeInTheDocument()

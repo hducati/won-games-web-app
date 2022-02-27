@@ -1,9 +1,9 @@
 import Document, {
-  DocumentContext,
   Html,
   Head,
   Main,
-  NextScript
+  NextScript,
+  DocumentContext
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
@@ -37,7 +37,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="pt-BR">
+      <Html lang="en-US">
         <Head />
         <body>
           <Main />
