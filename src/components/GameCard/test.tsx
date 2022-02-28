@@ -8,7 +8,7 @@ const props = {
   title: 'Population Zero',
   developer: 'Rockstar Games',
   img: 'https://source.unsplash.com/user/willianjusten/300x140',
-  price: 'R$ 235,00'
+  price: 235
 }
 
 describe('<GameCard />', () => {
@@ -39,7 +39,7 @@ describe('<GameCard />', () => {
   })
 
   it('should render a line-through in price when promotional', () => {
-    const promotionalPrice = 'R$ 15,00'
+    const promotionalPrice = 15
     renderWithTheme(<GameCard {...props} promotionalPrice={promotionalPrice} />)
 
     const priceText = screen.getByText(props.price)
